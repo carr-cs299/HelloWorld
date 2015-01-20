@@ -5,23 +5,27 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class HelloWorld extends ActionBarActivity {
+public class SayHello extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hello_world);
+        setContentView(R.layout.activity_say_hello);
+
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        TextView greeting = (TextView) findViewById(R.id.Greeting);
+        greeting.setText("Hello, " + name + "!");
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_hello_world, menu);
+        getMenuInflater().inflate(R.menu.menu_say_hello, menu);
         return true;
     }
 
@@ -38,17 +42,5 @@ public class HelloWorld extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void btnHelloClick(View view) {
-        /*TextView text = (TextView) findViewById(R.id.textView);
-        text.setText("Hello Class!");
-        RelativeLayout bg = (RelativeLayout) findViewById(R.id.bg);
-        bg.setBackgroundColor(0xFFFFFF00);*/
-        Intent intent = new Intent(HelloWorld.this, SayHello.class);
-        EditText nameText = (EditText) findViewById(R.id.Name);
-        String name = nameText.getText().toString();
-        intent.putExtra("name", name);
-        HelloWorld.this.startActivity(intent);
     }
 }
